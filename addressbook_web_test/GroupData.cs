@@ -30,13 +30,17 @@ namespace WebAddressbookTests
         }
         public string Header
         {
-            get { return header; }
-            set { header = value; }
+            get 
+            { return header; }
+            set 
+            { header = value; }
         }
         public string Footer
         {
-            get { return footer; }
-            set {  footer = value; }
+            get 
+            { return footer; }
+            set
+            {  footer = value; }
         }
     }
 }
