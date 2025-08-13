@@ -17,13 +17,67 @@ namespace WebAddressbookTests
         {
             GoToEditPage();
             FillContactInfo(contact);
-            GoToMainPageAfterContacCreation();
+            EnterButtonClick();
+            GoToMainPage();
             return this;
         }
-        public ContactHelper GoToMainPageAfterContacCreation()
+        public ContactHelper Remove(int number)
+        {
+            SelectContact(number);
+            RemoveContact();
+            return this;
+        }
+        public ContactHelper Modify(int number, ContactData newData)
+        {
+            SelectContact(number);
+            ClickEditButton();
+            ClearFields();
+            FillContactInfo(newData);
+            UpdateButtonClick();
+            GoToMainPage();
+            return this;
+        }
+        public ContactHelper ClearFields()
+        {
+            driver.FindElement(By.Name("firstname")).Clear();
+            driver.FindElement(By.Name("middlename")).Clear();
+            driver.FindElement(By.Name("lastname")).Clear();
+            driver.FindElement(By.Name("nickname")).Clear();
+            driver.FindElement(By.Name("company")).Clear();
+            driver.FindElement(By.Name("address")).Clear();
+            driver.FindElement(By.Name("email")).Clear();
+            driver.FindElement(By.Name("byear")).Clear();
+            return this;
+        }
+        public ContactHelper EnterButtonClick()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
-            driver.FindElement(By.LinkText("home page")).Click();
+            return this;
+        }
+        public ContactHelper UpdateButtonClick()
+        {
+            driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            return this;
+        }
+        public ContactHelper ClickEditButton()
+        {
+            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            return this;
+        }
+        public ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            GoToMainPage();
+            return this;
+        }
+        public ContactHelper SelectContact(int index)
+        {
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + index + "]/td/input")).Click(); ;
+            return this;
+        }
+        public ContactHelper GoToMainPage()
+        {
+            driver.FindElement(By.LinkText("home")).Click();
             return this;
         }
         public ContactHelper FillContactInfo(ContactData contact)
@@ -43,10 +97,8 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("//div[@id='content']/form/label[10]")).Click();
             driver.FindElement(By.Name("email")).Click();
             driver.FindElement(By.Name("email")).SendKeys(contact.Email);
-            driver.FindElement(By.Name("theform")).Click();
             driver.FindElement(By.Name("bday")).Click();
             new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.Bday);
-            driver.FindElement(By.Name("theform")).Click();
             new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.Bmonth);
             driver.FindElement(By.Name("byear")).Click();
             driver.FindElement(By.Name("byear")).SendKeys(contact.Byear.ToString());
