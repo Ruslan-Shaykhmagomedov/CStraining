@@ -3,7 +3,7 @@
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactModificationTest : TestBase
+    public class ContactModificationTest : AuthTestBase
     {
         [Test]
         public void TheContactModificationTest()
@@ -17,7 +17,7 @@ namespace WebAddressbookTests
             newData.Bday = "26";
             newData.Bmonth = "August";
 
-            applicationManager.Contact.Modify(2, newData);
+            app.Contact.Modify(2, newData);
         }
     }
 }

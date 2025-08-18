@@ -3,7 +3,7 @@
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupCreationTests : TestBase
+    public class GroupCreationTests : AuthTestBase
     {
       
         [Test]
@@ -13,7 +13,7 @@ namespace WebAddressbookTests
             group.Header = "TestHeader";
             group.Footer = "TestFooter";
 
-            applicationManager.Groups.Create(group);
+            app.Groups.Create(group);
         }
         [Test]
         public void EmptyGroupCreateTest()
@@ -22,7 +22,7 @@ namespace WebAddressbookTests
             group.Header = "";
             group.Footer = "";
 
-            applicationManager.Groups.Create(group);
+            app.Groups.Create(group);
         }
     }
 }

@@ -4,7 +4,7 @@
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactCreation : TestBase
+    public class ContactCreation : AuthTestBase
     {
         [Test]
         public void TheContactCreationTest()
@@ -18,7 +18,7 @@ namespace WebAddressbookTests
             contact.Bday = "26";
             contact.Bmonth = "December";
 
-            applicationManager.Contact.Create(contact);
+            app.Contact.Create(contact);
         }
     }
 }
