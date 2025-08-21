@@ -40,6 +40,7 @@ namespace WebAddressbookTests
         {
             try
             {
+                ApplicationManager.GetInstance().Auth.Logout();
                 driver.Quit();
             }
             catch (Exception)
