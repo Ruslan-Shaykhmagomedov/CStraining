@@ -3,6 +3,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,7 +41,7 @@ namespace WebAddressbookTests
         public ContactHelper CreateContact()
         {
             GoToEditPage();
-            FillContactInfo(new ContactData("Testov", "Test", "Testovich"));
+            FillContactInfo(new ContactData("Testov", "Test"));
             EnterButtonClick();
             GoToMainPage();
             return this;
@@ -92,10 +93,10 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.FirstName);
-            driver.FindElement(By.Name("middlename")).Click();
-            driver.FindElement(By.Name("middlename")).SendKeys(contact.MIddlename);
             driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
+            driver.FindElement(By.Name("lastname")).SendKeys(contact.LastName);
+            //driver.FindElement(By.Name("middlename")).Click();
+            //driver.FindElement(By.Name("middlename")).SendKeys(contact.Lastname);
             //driver.FindElement(By.Name("nickname")).Click();
             //driver.FindElement(By.Name("nickname")).SendKeys(contact.NickName);
             //driver.FindElement(By.Name("company")).Click();
@@ -120,6 +121,28 @@ namespace WebAddressbookTests
         public bool IsContactExist()
         {
             return IsElementPresent(By.Name("entry"));
+        }
+        private List<ContactData> contactCache = null;
+        public List<ContactData> GetContactList()
+        {
+            if(contactCache == null)
+            {
+                contactCache = new List<ContactData>();
+                manager.Navigator.OpenHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("[name='entry']"));
+                foreach (IWebElement element in elements)
+                {
+                    // Находим все колонки в строке
+                    IList<IWebElement> column = element.FindElements(By.TagName("td"));
+
+                    // Извлекаем фамилию (2я колонка) и имя (3я колонка)
+                    string lastname = column[1].Text;
+                    string firstname = column[2].Text;
+
+                    contactCache.Add(new ContactData(firstname, lastname));
+                }
+            }
+            return new List<ContactData>(contactCache);
         }
     }
 }

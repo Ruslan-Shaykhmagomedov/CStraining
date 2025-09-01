@@ -1,11 +1,12 @@
-﻿
+﻿using System;
+
 namespace WebAddressbookTests
 {
-    public class ContactData
+    public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string firstname;
-        private string middlename;
         private string lastname;
+        //private string lastname;
         private string nickname = "";
         private string company = "";
         private string address = "";
@@ -14,11 +15,11 @@ namespace WebAddressbookTests
         private string bmonth = "";  
         private int byear;  
 
-        public ContactData (string firstname, string middlename, string lastname)
+        public ContactData (string firstname, string lastname)
         {
             this.firstname = firstname;
-            this.middlename = middlename;
             this.lastname = lastname;
+            //this.lastname = lastname;
         }
         public string FirstName
         {
@@ -27,20 +28,53 @@ namespace WebAddressbookTests
             set
             { firstname = value; }
         }
-        public string MIddlename
+        public string LastName
         {
             get 
-            { return middlename; }
-            set 
-            { middlename = value; }
-        }
-        public string Lastname
-        {
-            get
             { return lastname; }
             set 
             { lastname = value; }
         }
+        public bool Equals(ContactData other)
+        {
+            if (object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            return FirstName == other.FirstName && LastName == other.LastName;
+        }
+        public override int GetHashCode()
+        {
+            return FirstName.GetHashCode() & LastName.GetHashCode();
+        }
+        public override string ToString()
+        {
+            return FirstName + LastName;
+        }
+        public int CompareTo(ContactData other)
+        {
+            if (object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+            int LastNameCompare = LastName.CompareTo(other.LastName);
+            if (LastNameCompare != 0)
+            {
+                return LastNameCompare;
+            }
+            return FirstName.CompareTo(other.FirstName);
+        }
+        //public string Lastname
+        //{
+        //    get
+        //    { return lastname; }
+        //    set 
+        //    { lastname = value; }
+        //}
         public string NickName
         {
             get

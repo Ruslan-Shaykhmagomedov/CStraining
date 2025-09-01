@@ -1,9 +1,6 @@
 ﻿using NUnit.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace WebAddressbookTests
 {
@@ -16,7 +13,15 @@ namespace WebAddressbookTests
             {
                 app.Contact.CreateContact();
             }
-            app.Contact.Remove(2);
+
+            List<ContactData> oldContacts = app.Contact.GetContactList();
+            app.Contact.Remove(1);
+
+            List<ContactData> newContacts = app.Contact.GetContactList();
+            oldContacts.RemoveAt(0);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }

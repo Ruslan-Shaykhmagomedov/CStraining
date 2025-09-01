@@ -1,4 +1,6 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
+using System.Security.Cryptography;
 
 
 namespace WebAddressbookTests
@@ -17,7 +19,14 @@ namespace WebAddressbookTests
             {
                 app.Groups.CreateGroup();
             }
-            app.Groups.Modify(1, newData); // Modify Group
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
+            app.Groups.Modify(0, newData); // Modify Group
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups[0].Name = newData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
 
         }
     }

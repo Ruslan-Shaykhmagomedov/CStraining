@@ -8,7 +8,7 @@ namespace WebAddressbookTests
         [Test]
         public void TheContactModificationTest()
         {
-            ContactData newData = new ContactData("Margorita", "Shaikhmagomedova", "Arturovna");
+            ContactData newData = new ContactData("Margorita", "Shaikhmagomedova");
             //newData.Email = "apostaterussle@gmail.com";
             //newData.NickName = "MargoSha";
             //newData.Company = "VSK";
