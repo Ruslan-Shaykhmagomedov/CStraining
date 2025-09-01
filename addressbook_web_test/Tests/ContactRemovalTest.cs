@@ -15,7 +15,7 @@ namespace WebAddressbookTests
             }
 
             List<ContactData> oldContacts = app.Contact.GetContactList();
-            app.Contact.Remove(1);
+            app.Contact.Remove(0);
 
             List<ContactData> newContacts = app.Contact.GetContactList();
             oldContacts.RemoveAt(0);

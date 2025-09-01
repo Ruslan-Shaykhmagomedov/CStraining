@@ -81,7 +81,7 @@ namespace WebAddressbookTests
         }
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + index + "]/td/input")).Click(); ;
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + (index+2) + "]/td/input")).Click(); ;
             return this;
         }
         public ContactHelper GoToMainPage()
@@ -122,9 +122,9 @@ namespace WebAddressbookTests
         {
             return IsElementPresent(By.Name("entry"));
         }
-        private List<ContactData> contactCache = null;
         public List<ContactData> GetContactList()
         {
+            List<ContactData> contactCache = null;
             if(contactCache == null)
             {
                 contactCache = new List<ContactData>();
