@@ -34,7 +34,7 @@ namespace WebAddressbookTests
             ClickEditButton();
             ClearFields();
             FillContactInfo(newData);
-            UpdateButtonClick();
+            SubmitButtonClick();
             GoToMainPage();
             return this;
         }
@@ -63,9 +63,10 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
             return this;
         }
-        public ContactHelper UpdateButtonClick()
+        public ContactHelper SubmitButtonClick()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            contactCache = null;
             return this;
         }
         public ContactHelper ClickEditButton()
@@ -76,6 +77,7 @@ namespace WebAddressbookTests
         public ContactHelper RemoveContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            contactCache = null;
             GoToMainPage();
             return this;
         }
@@ -122,6 +124,7 @@ namespace WebAddressbookTests
         {
             return IsElementPresent(By.Name("entry"));
         }
+        private List<ContactData> contactCache = null;
         public List<ContactData> GetContactList()
         {
             List<ContactData> contactCache = null;

@@ -4,37 +4,15 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string firstname;
-        private string lastname;
-        //private string lastname;
-        private string nickname = "";
-        private string company = "";
-        private string address = "";
-        private string email = "";
-        private string bday = "";
-        private string bmonth = "";  
-        private int byear;  
-
         public ContactData (string firstname, string lastname)
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
-            //this.lastname = lastname;
+            FirstName = firstname;
+            LastName = lastname;
+            //MiddleName = middlename;
         }
-        public string FirstName
-        {
-            get
-            { return firstname; }
-            set
-            { firstname = value; }
-        }
-        public string LastName
-        {
-            get 
-            { return lastname; }
-            set 
-            { lastname = value; }
-        }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
         public bool Equals(ContactData other)
         {
             if (object.ReferenceEquals(other, null))
@@ -68,61 +46,13 @@ namespace WebAddressbookTests
             }
             return FirstName.CompareTo(other.FirstName);
         }
-        //public string Lastname
-        //{
-        //    get
-        //    { return lastname; }
-        //    set 
-        //    { lastname = value; }
-        //}
-        public string NickName
-        {
-            get
-                { return nickname; }
-            set
-                { nickname = value; }
-        }
-        public string Company
-        {
-            get 
-            { return company; }
-            set 
-            { company = value; }
-        }
-        public string Address
-        {
-            get 
-            { return address; }
-            set 
-            { address = value; }    
-        }
-        public string Email
-        {
-            get 
-            { return email; }
-            set 
-            { email = value; }
-        }
-        public string Bday
-        {
-            get 
-            { return bday; }
-            set 
-            { bday = value; }
-        }
-        public string Bmonth
-        {
-            get
-            { return bmonth; }
-            set
-            { bmonth = value; }
-        }
-        public int Byear
-        {
-            get
-            { return byear; }
-            set
-            { byear = value; }
-        }
+        //public string MiddleName {get; set;}
+        public string NickName {  get; set; }
+        public string Company {  get; set; }
+        public string Address {  get; set; }
+        public string Email {  get; set; }
+        public string Bday {  get; set; }
+        public string Bmonth {  get; set; }
+        public int Byear { get; set; }
     }
 }
