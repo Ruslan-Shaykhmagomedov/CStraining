@@ -9,7 +9,7 @@ namespace WebAddressbookTests
         {
             this.baseURL = baseURL;
         }
-        public void OpenHomePage()
+        public void GoToHomePage()
         {
             if (driver.Url == baseURL + "/addressbook/"
                 && IsElementPresent(By.Name("new")))

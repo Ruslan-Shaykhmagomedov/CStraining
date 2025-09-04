@@ -24,7 +24,7 @@ namespace WebAddressbookTests
             }
             List<ContactData> oldContacts = app.Contact.GetContactList();
 
-            app.Contact.Modify(2, newData);
+            app.Contact.Modify(0, newData);
             List<ContactData> newContacts = app.Contact.GetContactList();
             oldContacts[0].FirstName = newData.FirstName;
             oldContacts[0].LastName = newData.LastName;
