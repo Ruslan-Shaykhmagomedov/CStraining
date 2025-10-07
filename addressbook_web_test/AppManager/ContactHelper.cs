@@ -194,5 +194,26 @@ namespace WebAddressbookTests
             Match m = new Regex(@"\d+").Match(text);
             return Int32.Parse(m.Value);
         }
+        public ContactData GetContactInformationFromDetails(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            InitDetails(index);
+
+            string allnames = driver.FindElement(By.Id("content"))
+                   .FindElement(By.TagName("b"))
+                   .Text;
+            string textInDetails = driver.FindElement(By.Id("content")).Text;
+            return new ContactData()
+            {
+                AllNames = allnames,
+                TextInDetails = textInDetails
+            };
+        }
+        public void InitDetails(int index)
+        {
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[6]
+                .FindElement(By.TagName("a")).Click();
+        }
     }
 }
