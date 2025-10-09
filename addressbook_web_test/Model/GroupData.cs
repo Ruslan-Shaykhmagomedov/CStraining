@@ -26,7 +26,7 @@ namespace WebAddressbookTests
         }
         public override string ToString()
         {
-            return Name;
+            return "name" + Name + "header" + Header + "footer" + Footer;
         }
         public int CompareTo(GroupData other)
         {

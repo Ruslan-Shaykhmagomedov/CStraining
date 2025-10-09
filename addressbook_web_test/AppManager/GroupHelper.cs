@@ -133,7 +133,7 @@ namespace WebAddressbookTests
                     }
                     else
                     {
-                        groupCache[i].Name = parts[i].Trim();
+                        groupCache[i].Name = parts[i-shift].Trim();
                     }
                 }
             }
