@@ -158,7 +158,7 @@ namespace WebAddressbookTests
             // Если есть телефоны, возвращаем их с переносами строк
             if (phones.Count > 0)
             {
-                return string.Join("\r\n", phones) + "\r\n\r\n";
+                return string.Join("\r\n", phones);
             }
 
             // Если телефонов нет, возвращаем пустую строку
