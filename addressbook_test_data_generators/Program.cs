@@ -18,6 +18,7 @@ namespace addressbook_test_data_generators
                     TestBase.GenerateRandomString(10),
                     TestBase.GenerateRandomString(10));
             }
+            writer.Close();
         }
     }
 }
