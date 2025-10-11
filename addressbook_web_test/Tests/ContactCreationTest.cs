@@ -9,25 +9,16 @@ namespace WebAddressbookTests
     {
         public static IEnumerable<ContactData> RandomContactDataProvider()
         {
-            List<ContactData> contacts = new List<ContactData>();
+            List<ContactData> contact = new List<ContactData>();
             for (int i = 0; i < 5; i++)
             {
-                contacts.Add(new ContactData(GenerateRandomString(30), GenerateRandomString(30)));
+                contact.Add(new ContactData(GenerateRandomString(30), GenerateRandomString(30)));
             }
-            return contacts;
+            return contact;
         }
         [Test, TestCaseSource("RandomContactDataProvider")]
-        public void TheContactCreationTest()
+        public void TheContactCreationTest(ContactData contact)
         {
-            ContactData contact = new ContactData("Check", "Count");
-            //contact.Email = "apostaterussle@gmail.com";
-            //contact.NickName = "Rus_Shaykh";
-            //contact.Company = "VSK";
-            //contact.Address = "Nizhniy Novgorod";
-            //contact.Byear = 1996;
-            //contact.Bday = "26";
-            //contact.Bmonth = "December";
-
             List<ContactData> oldContacts = app.Contact.GetContactList();
 
             app.Contact.Create(contact);
