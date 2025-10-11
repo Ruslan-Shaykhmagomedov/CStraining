@@ -122,9 +122,9 @@ namespace WebAddressbookTests
                 else
                 {
                     return (
-                        (CleanUpNameInDetails(FirstName) + " " + CleanUpNameInDetails(LastName)).Trim()
-                        + CleanUpAddressInDetails(Address) 
-                        + CleanUpPhoneInDetails(HomePhone, MobilePhone, WorkPhone).Trim());
+                        (CleanUpNameInDetails(FirstName) + " " + CleanUpNameInDetails(LastName)).Trim() + "\r\n" 
+                        + CleanUpAddressInDetails(Address)
+                        + CleanUpPhoneInDetails(HomePhone, MobilePhone, WorkPhone)).Trim();
                 }
             }
             set
@@ -158,7 +158,7 @@ namespace WebAddressbookTests
             // Если есть телефоны, возвращаем их с переносами строк
             if (phones.Count > 0)
             {
-                return string.Join("\r\n", phones);
+                return string.Join("\r\n", phones) + "\r\n\r\n";
             }
 
             // Если телефонов нет, возвращаем пустую строку
@@ -168,9 +168,9 @@ namespace WebAddressbookTests
         {
             if (address == null || address == "")
             {
-                return "";
+                return "" + "\r\n";
             }
-            return address ;
+            return address + "\r\n\r\n";
         }
 
         private string CleanUpNameInDetails(string name)
@@ -216,14 +216,6 @@ namespace WebAddressbookTests
         //        return "";
         //    }
         //    return "H: " + homePhone + "\r\n";
-        //}
-        //private string CleanUpName(string name)
-        //{
-        //    if (name == null || name == "")
-        //    {
-        //        return "";
-        //    }
-        //    return name;
         //}
     }
 }
