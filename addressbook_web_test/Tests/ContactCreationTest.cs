@@ -20,7 +20,8 @@ namespace WebAddressbookTests
             }
             return contact;
         }
-        public static IEnumerable<ContactData> GroupDataFromCSVFile()
+
+        public static IEnumerable<ContactData> ContactDataFromCSVFile()
         {
             List<ContactData> contacts = new List<ContactData>();
             string[] lines = File.ReadAllLines(@"contact.csv");
@@ -29,13 +30,24 @@ namespace WebAddressbookTests
                 string[] parts = l.Split(',');
                 contacts.Add(new ContactData(parts[0])
                 {
-                    LastName = parts[1],
+                    LastName = parts[1]
                 });
             }
             return contacts;
         }
+        public static IEnumerable<ContactData> ContactDataFromXMLFile()
+        {
+            return (List<ContactData>)
+                new XmlSerializer(typeof(List<ContactData>))
+                .Deserialize(new StreamReader(@"contact.xml"));
+        }
+        public static IEnumerable<ContactData> ContactDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<ContactData>>(
+                File.ReadAllText(@"contact.json"));
+        }
 
-        [Test, TestCaseSource("GroupDataFromCSVFile")]
+        [Test, TestCaseSource("ContactDataFromXMLFile")]
         public void TheContactCreationTest(ContactData contact)
         {
             List<ContactData> oldContacts = app.Contact.GetContactList();

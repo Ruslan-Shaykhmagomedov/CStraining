@@ -1,10 +1,36 @@
-{
-  "exclude": [
-    "**/bin",
-    "**/bower_components",
-    "**/jspm_packages",
-    "**/node_modules",
-    "**/obj",
-    "**/platforms"
-  ]
-}
+[
+  {
+    "FirstName": "$B/UL=",
+    "LastName": "HF+\\OH*H]L(E$@\"Y3TW",
+    "NickName": null,
+    "Company": null,
+    "Address": null,
+    "HomePhone": null,
+    "MobilePhone": null,
+    "WorkPhone": null,
+    "AllPhones": "",
+    "Email": null,
+    "Bday": null,
+    "Bmonth": null,
+    "Byear": 0,
+    "AllNames": "$B/UL= HF+\\OH*H]L(E$@\"Y3TW",
+    "TextInDetails": "$B/UL= HF+\\OH*H]L(E$@\"Y3TW"
+  },
+  {
+    "FirstName": "#*Fa",
+    "LastName": "C+@[.0%$-'Q",
+    "NickName": null,
+    "Company": null,
+    "Address": null,
+    "HomePhone": null,
+    "MobilePhone": null,
+    "WorkPhone": null,
+    "AllPhones": "",
+    "Email": null,
+    "Bday": null,
+    "Bmonth": null,
+    "Byear": 0,
+    "AllNames": "#*Fa C+@[.0%$-'Q",
+    "TextInDetails": "#*Fa C+@[.0%$-'Q"
+  }
+]
