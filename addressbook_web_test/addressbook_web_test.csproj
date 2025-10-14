@@ -120,6 +120,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="contact.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="contact.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="groups.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -129,6 +135,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="contact.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="groups.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

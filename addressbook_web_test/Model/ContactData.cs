@@ -10,6 +10,8 @@ namespace WebAddressbookTests
         private string allNames;
         private string textInDetails;
 
+        public ContactData()
+        { }
         public ContactData(string firstname, string lastname)
         {
             FirstName = firstname;
@@ -92,9 +94,6 @@ namespace WebAddressbookTests
         public string Bday { get; set; }
         public string Bmonth { get; set; }
         public int Byear { get; set; }
-        public ContactData()
-        {
-        }
         public string AllNames
         {
             get
