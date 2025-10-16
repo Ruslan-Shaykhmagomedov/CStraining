@@ -6,6 +6,7 @@ using System.Runtime.Remoting.Messaging;
 using NUnit.Framework.Constraints;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using System.Linq;
 using Excel = Microsoft.Office.Interop.Excel;
 
 
@@ -121,9 +122,7 @@ namespace WebAddressbookTests
             System.Console.WriteLine(end.Subtract(start).TotalSeconds);
 
             start = DateTime.Now;
-            AddressBookDB db = new AddressBookDB();
-            List<GroupData> fromDb = (from g in db.Groups select g).ToList();
-            db.Close();
+            List<GroupData> fromDb = GroupData.GetAll();
             end = DateTime.Now;
             System.Console.WriteLine(end.Subtract(start).TotalSeconds);
         }
