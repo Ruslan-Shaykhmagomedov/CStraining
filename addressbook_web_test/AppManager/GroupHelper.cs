@@ -27,6 +27,20 @@ namespace WebAddressbookTests
                 ReturnToGroupsPage();
                 return this;
         }
+        public GroupHelper Remove(GroupData group)
+        {
+            manager.Navigator.GoToGroupsPage();
+
+            SelectGroup(group.Id);
+            RemoveGroup();
+            ReturnToGroupsPage();
+            return this;
+        }
+        public GroupHelper SelectGroup(string id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
+            return this;
+        }
         public GroupHelper Modify(int number, GroupData newData)
         {
             SelectGroup(number);
@@ -97,17 +111,8 @@ namespace WebAddressbookTests
 
         public GroupHelper SelectGroup(int index)
         {
-            //if (GroupExist())
-            //{
                 driver.FindElement(By.XPath("//div[@id='content']/form/span[" + (index +1) + "]/input")).Click();
                 return this;
-            //}
-            //else
-            //{
-            //    CreateGroup();
-            //    SelectGroup(index);
-            //    return this;
-            //}
         }
         private List<GroupData> groupCache = null;
         public List<GroupData> GetGroupList()
