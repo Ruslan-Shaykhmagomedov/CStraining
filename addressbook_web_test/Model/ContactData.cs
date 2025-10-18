@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace WebAddressbookTests
 {
@@ -32,6 +33,9 @@ namespace WebAddressbookTests
 
         [Column(Name = "id"),PrimaryKey]
         public string Id { get; set; }
+
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
         public bool Equals(ContactData other)
         {
             if (object.ReferenceEquals(other, null))
@@ -140,34 +144,34 @@ namespace WebAddressbookTests
         }
         private string CleanUpPhoneInDetails(string homePhone, string mobilePhone, string workPhone)
         {
-            // Cписок для хранения непустых телефонов
+            // List for not empty phones
             var phones = new List<string>();
 
-            // Проверяем и добавляем домашний телефон
+            // Check and add home phone
             if (!string.IsNullOrEmpty(homePhone))
             {
                 phones.Add("H: " + homePhone);
             }
 
-            // Проверяем и добавляем мобильный телефон
+            // Check and add mobile phone
             if (!string.IsNullOrEmpty(mobilePhone))
             {
                 phones.Add("M: " + mobilePhone);
             }
 
-            // Проверяем и добавляем рабочий телефон
+            // Check and add workphone
             if (!string.IsNullOrEmpty(workPhone))
             {
                 phones.Add("W: " + workPhone);
             }
 
-            // Если есть телефоны, возвращаем их с переносами строк
+            // If there are phones, return with actions (\r\n)
             if (phones.Count > 0)
             {
                 return string.Join("\r\n", phones) + "\r\n\r\n";
             }
 
-            // Если телефонов нет, возвращаем пустую строку
+            // If there is no phone, return empty string
             return string.Empty;
         }
         private string CleanUpAddressInDetails(string address)
@@ -196,33 +200,14 @@ namespace WebAddressbookTests
             }
             return text + "\r\n";
         }
+        public static List<ContactData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts/*.Where(x => x.Deprecated == "0000-00-00 00:00:00")*/ select c).ToList(); // if there was this condition
+            }
 
-        //private string CleanUpWorkPhoneInDetails(string workPhone)
-        //{
-        //    if (workPhone == null || workPhone == "")
-        //    {
-        //        return "";
-        //    }
-        //    return "W: " + workPhone + "\r\n";
-        //}
-
-        //private string CleanUpMobilePhoneInDetails(string mobilePhone)
-        //{
-        //    if (mobilePhone == null || mobilePhone == "")
-        //    {
-        //        return "";
-        //    }
-        //    return "M: " + mobilePhone + "\r\n";
-        //}
-
-        //private string CleanUpHomePhoneInDetails(string homePhone)
-        //{
-        //    if (homePhone == null || homePhone == "")
-        //    {
-        //        return "";
-        //    }
-        //    return "H: " + homePhone + "\r\n";
-        //}
+        }
     }
 }
 
