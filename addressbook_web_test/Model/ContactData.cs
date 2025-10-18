@@ -1,17 +1,19 @@
-﻿using System;
+﻿using LinqToDB.Mapping;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
+    [Table(Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         string allPhones;
         private string allNames;
         private string textInDetails;
-
         public ContactData()
-        { }
+        {
+        }
         public ContactData(string firstname, string lastname)
         {
             FirstName = firstname;
@@ -22,9 +24,14 @@ namespace WebAddressbookTests
         {
             FirstName = firstname;
         }
+        [Column(Name ="firstname")]
         public string FirstName { get; set; }
+
+        [Column(Name = "lastname")]
         public string LastName { get; set; }
 
+        [Column(Name = "id"),PrimaryKey]
+        public string Id { get; set; }
         public bool Equals(ContactData other)
         {
             if (object.ReferenceEquals(other, null))
