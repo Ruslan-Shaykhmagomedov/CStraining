@@ -6,27 +6,30 @@ using System.Security.Cryptography;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupModificationTests : AuthTestBase
+    public class GroupModificationTests : GroupTestBase
     {
         [Test]
         public void GroupModificationTest()
         {
-            GroupData newData = new GroupData("NewName");
-            newData.Header = "NewHeader";
-            newData.Footer = "NewFooter";
+            
             app.Navigator.GoToGroupsPage();
             if (!app.Groups.IsGroupExist()) // If there is no Group, Create new one. 
             {
                 app.Groups.CreateGroup();
             }
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
+            GroupData newData = new GroupData("NewName");
+            newData.Header = "NewHeader";
+            newData.Footer = "NewFooter";
+
+            List<GroupData> oldGroups = GroupData.GetAll();
             GroupData oldData = oldGroups[0];
 
-            app.Groups.Modify(0, newData); // Modify Group
+            app.Groups.Modify(newData, oldData); // Modify Group
 
             Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups[0].Name = newData.Name;
             oldGroups.Sort();
             newGroups.Sort();

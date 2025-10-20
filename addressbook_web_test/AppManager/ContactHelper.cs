@@ -29,6 +29,16 @@ namespace WebAddressbookTests
             RemoveContact();
             return this;
         }
+        public ContactHelper Remove(ContactData contact)
+        {
+            manager.Navigator.GoToHomePage();
+
+            SelectContact(contact.Id);
+            RemoveContact();
+            manager.Navigator.GoToHomePage();
+            return this;
+
+        }
         public ContactHelper Modify(int number, ContactData newData)
         {
             manager.Navigator.GoToHomePage();
@@ -37,6 +47,20 @@ namespace WebAddressbookTests
             FillContactInfo(newData);
             SubmitButtonClick();
             GoToMainPage();
+            return this;
+        }
+        public ContactHelper Modify (ContactData newData, ContactData oldData)
+        {
+            manager.Navigator.GoToHomePage();
+            InitContactEdit(oldData.Id);
+            FillContactInfo(newData);
+            SubmitButtonClick();
+            GoToMainPage();
+            return this;
+        }
+        public ContactHelper InitContactEdit (string Id)
+        {
+            driver.FindElement(By.XPath("//tr[.//input[@value='" + Id + "']]//img[@title='Edit']")).Click(); // Contact editing button click
             return this;
         }
         public ContactHelper CreateContact()
@@ -96,10 +120,12 @@ namespace WebAddressbookTests
         }
         public ContactHelper FillContactInfo(ContactData contact)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.FirstName);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.LastName);
+            Type(By.Name("firstname"), contact.FirstName);
+            Type(By.Name("lastname"), contact.LastName);
+            //driver.FindElement(By.Name("firstname")).Click();
+            //driver.FindElement(By.Name("firstname")).SendKeys(contact.FirstName);
+            //driver.FindElement(By.Name("lastname")).Click();
+            //driver.FindElement(By.Name("lastname")).SendKeys(contact.LastName);
             //driver.FindElement(By.Name("middlename")).Click();
             //driver.FindElement(By.Name("middlename")).SendKeys(contact.Lastname);
             //driver.FindElement(By.Name("nickname")).Click();

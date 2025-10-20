@@ -31,7 +31,7 @@ namespace WebAddressbookTests
         [Column(Name = "lastname")]
         public string LastName { get; set; }
 
-        [Column(Name = "id"),PrimaryKey]
+        [Column(Name = "id"),PrimaryKey,Identity]
         public string Id { get; set; }
 
         [Column(Name = "deprecated")]

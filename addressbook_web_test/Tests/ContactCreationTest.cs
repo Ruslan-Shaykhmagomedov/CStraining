@@ -50,11 +50,11 @@ namespace WebAddressbookTests
         [Test, TestCaseSource("ContactDataFromXMLFile")]
         public void TheContactCreationTest(ContactData contact)
         {
-            List<ContactData> oldContacts = app.Contact.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
 
             app.Contact.Create(contact);
 
-            List<ContactData> newContacts = app.Contact.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
             oldContacts.Add(contact);
             oldContacts.Sort();

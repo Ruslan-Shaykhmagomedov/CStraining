@@ -36,6 +36,17 @@ namespace WebAddressbookTests
             ReturnToGroupsPage();
             return this;
         }
+        public GroupHelper Modify(GroupData newData, GroupData oldData)
+        {
+            manager.Navigator.GoToGroupsPage();
+
+            SelectGroup(oldData.Id);
+            InitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupsPage();
+            return this;
+        }
         public GroupHelper SelectGroup(string id)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
