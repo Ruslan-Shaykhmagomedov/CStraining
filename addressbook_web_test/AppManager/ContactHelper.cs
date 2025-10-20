@@ -241,6 +241,27 @@ namespace WebAddressbookTests
                 .FindElements(By.TagName("td"))[6]
                 .FindElement(By.TagName("a")).Click();
         }
+        public void RemoveContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+
+            SelectGroupFilter(group.Name);
+            SelectContact(contact.Id);
+            CommitContactRemovalFromGroup();
+
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+               .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        private void CommitContactRemovalFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+
+        private void SelectGroupFilter(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(name);
+        }
 
         //Add contact to group
         public void AddContactToGroup(ContactData contact, GroupData group)
@@ -251,7 +272,7 @@ namespace WebAddressbookTests
             SelectGroupToAdd(group.Name);
             CommitAddingContactToGroup();
             new WebDriverWait(driver, TimeSpan.FromSeconds(10))
-                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count() > 0);
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count() > 0); // Waiter for 10 sec with lyambda function
         }
 
         public void CommitAddingContactToGroup()

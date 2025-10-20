@@ -7,10 +7,10 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
-    public class AddingContactToGroupTest : AuthTestBase
+    public class RemoveContactFromGroupTest : AuthTestBase
     {
         [Test]
-        public void TestAddingContactToGroup()
+        public void ContactRemoveFromGroup()
         {
             List<GroupData> allGroups = GroupData.GetAll();
             if (allGroups.Count == 0) // If there was no group, than create new 
@@ -35,32 +35,33 @@ namespace WebAddressbookTests
             foreach (GroupData group in allGroups)
             {
                 List<ContactData> contactInGroup = group.GetContacts();
+                List<ContactData> contactNotInGroup = allContacts.Except(contactInGroup).ToList();
 
-                if (contactInGroup.Count > 0)
+                if (contactNotInGroup.Count > 0)
                 {
                     groupCheck = group;
-                    contactCheck = contactInGroup.First();
+                    contactCheck = contactNotInGroup.First();
                     break;
                 }
             }
 
-            if (groupCheck == null) // if there is no group with contact, add contact to group
+            if (groupCheck == null) // if every contacts in groups, create new group
             {
-                groupCheck = allGroups.First();
+                GroupData newGroup = new GroupData("NewGroupTest");
+                app.Groups.Create(newGroup);
+                groupCheck = GroupData.GetAll().First(g => g.Name == newGroup.Name);
                 contactCheck = allContacts.First();
-
-                app.Contact.AddContactToGroup(contactCheck, groupCheck); // Contact adding to group function
             }
 
-            List<ContactData> oldList = groupCheck.GetContacts(); // get old contact list in ggroup
+            List<ContactData> oldList = groupCheck.GetContacts(); // Get contact List for this group
 
-            app.Contact.RemoveContactFromGroup(contactCheck, groupCheck); // remove contact from group
-            List<ContactData> newList = groupCheck.GetContacts();
-            oldList.Remove(contactCheck);
-            newList.Sort();
+            app.Contact.AddContactToGroup(contactCheck, groupCheck); // add contact to group
+
+            List<ContactData> newList = groupCheck.GetContacts(); // Get new contact List
+            oldList.Add(contactCheck);
             oldList.Sort();
-
-            Assert.AreEqual(oldList, newList); // check if they are the same
+            newList.Sort();
+            Assert.AreEqual(oldList,newList);
         }
     }
 }
